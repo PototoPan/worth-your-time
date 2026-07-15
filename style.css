@@ -190,6 +190,9 @@ button:hover {
     color: var(--text-primary);
 }
 
+.results p.hidden {
+    display: none !important;
+}
 
 /* ── Modal ── */
 .modal-overlay {
