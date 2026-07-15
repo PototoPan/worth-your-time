@@ -173,10 +173,7 @@ button:hover {
     border-top: 1.5px solid var(--border);
 }
 
-.results.visible {
-    opacity: 1;
-
-}.results p {
+.results p {
     display: flex;
     justify-content: space-between;
     padding: 0.6rem 0;
@@ -190,6 +187,9 @@ button:hover {
     color: var(--text-primary);
 }
 
+.results p.hidden {
+    display: none !important;
+}
 
 /* ── Modal ── */
 .modal-overlay {
