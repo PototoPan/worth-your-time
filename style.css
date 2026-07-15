@@ -1,0 +1,257 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #f5f5f3;
+    --surface: #ffffff;
+    --text-primary: #1a1a1a;
+    --text-secondary: #6b7280;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --border: #e5e7eb;
+    --radius: 10px;
+    --shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Helvetica', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1rem;
+}
+
+main {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 480px;
+    height: fit-content;
+}
+
+/* ── Header ── */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.header p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+h2 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.inputs > h2:first-child {
+    margin-top: 0;
+}
+
+.results h2 {
+    margin-top: 0;
+}
+
+/* ── Settings button ── */
+#settings-btn {
+    margin-top: 0.25rem;
+    width: auto;
+    padding: 0.4rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    opacity: 0.4;
+    transition: opacity 0.2s;
+}
+
+#settings-btn:hover {
+    background: none;
+    opacity: 1;
+}
+
+#settings-btn img {
+    display: block;
+}
+
+/* ── Fields ── */
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+}
+
+.field label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+}
+
+.field input {
+    padding: 0.65rem 0.75rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    color: var(--text-primary);
+    background: var(--bg);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.field input:hover {
+    border-color: var(--accent);
+}
+
+.field input:focus {
+    border-color: var(--accent);
+}
+
+.field input.invalid {
+    border-color: #dc2626;
+}
+
+.field-error {
+    display: block;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    height: 1.5rem;
+    padding-top: 0.25rem;
+    color: #dc2626;
+}
+
+/* ── Calculate button ── */
+button {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 0.65rem;
+    background: var(--accent);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: var(--accent-hover);
+}
+
+/* ── Results ── */
+.results {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1.5px solid var(--border);
+}
+
+.results.visible {
+    opacity: 1;
+
+}.results p {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+.results p span {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+
+/* ── Modal ── */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.modal {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    width: 100%;
+    max-width: 360px;
+    margin: 1rem;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--text-primary);
+}
+
+.modal .field {
+    margin-bottom: 1rem;
+}
+
+.modal .field:last-child {
+    margin-bottom: 0;
+}
+
+#modal-close {
+    margin-top: 0;
+    width: auto;
+    padding: 0.25rem 0.5rem;
+    background: none;
+    color: var(--text-secondary);
+    border: none;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+#modal-close:hover {
+    background: var(--bg);
+    color: var(--text-primary);
+}
