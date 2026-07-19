@@ -6,33 +6,29 @@ document.getElementById('setting-hoursperday').value = hoursWorkedPerDay;
 document.getElementById('setting-daysperweek').value = daysWorkedPerWeek;
 document.getElementById('setting-weeksperannum').value = weeksWorkedPerAnnum;
 
-function getHoursPerAnnum() {
-    return weeksWorkedPerAnnum * hoursWorkedPerDay * daysWorkedPerWeek;
-}
-
-
-
+let calculationMode = 'wage'; 
 
 //update hr income to yearly income & vice versa 
 
 document.getElementById('hrincome').addEventListener('input', function() {
     const hrIncome = parseFloat(this.value);
     if (!isNaN(hrIncome) && hrIncome > 0) {
-        document.getElementById('yrincome').value = parseFloat((hrIncome * 52 * 40 ).toFixed(2));
+        document.getElementById('yrincome').value = parseFloat((hrIncome * weeksWorkedPerAnnum * daysWorkedPerWeek * hoursWorkedPerDay).toFixed(2));
     } else {
         document.getElementById('yrincome').value = '';
     }
+    calculationMode = 'wage';
 });
 
 document.getElementById('yrincome').addEventListener('input', function() {
     const yrIncome = parseFloat(this.value);
     if (!isNaN(yrIncome) && yrIncome > 0) {
-        document.getElementById('hrincome').value = parseFloat((yrIncome / 52 / 40).toFixed(2));
+        document.getElementById('hrincome').value = parseFloat((yrIncome / weeksWorkedPerAnnum / daysWorkedPerWeek / hoursWorkedPerDay).toFixed(2));
     } else {
         document.getElementById('hrincome').value = '';
     }
+    calculationMode = 'salary';
 });
-
 
 //update work settings values && recalculate 
 
@@ -116,6 +112,7 @@ document.getElementById('calculate-btn').addEventListener('click', function() {
 //calculate numbers then update to resutls 
 function recalculate() {
     const hrIncome = parseFloat(document.getElementById('hrincome').value);
+    const yrIncome = parseFloat(document.getElementById('yrincome').value);
     const cost     = parseFloat(document.getElementById('cost').value);
     if (isNaN(hrIncome) || hrIncome <= 0 || isNaN(cost) || cost <= 0) return;
 
@@ -123,21 +120,25 @@ function recalculate() {
     const days  = hours / hoursWorkedPerDay;
     const weeks = days  / daysWorkedPerWeek;
 
+    let years;
+    if (calculationMode === 'salary' && !isNaN(yrIncome) && yrIncome > 0) {
+        years = cost / yrIncome;
+    } else {
+        years = weeks / weeksWorkedPerAnnum;
+    }
+
     document.getElementById('result-hours').textContent = parseFloat(hours.toFixed(1));
     document.getElementById('result-days').textContent  = parseFloat(days.toFixed(1));
     document.getElementById('result-weeks').textContent = parseFloat(weeks.toFixed(2));
 
     const yearsRow = document.getElementById('years-row');
-    if (weeks >= 52) {
-        const years = weeks / weeksWorkedPerAnnum;
+    if (years >= 1) {
         document.getElementById('result-years').textContent = parseFloat(years.toFixed(2));
         yearsRow.classList.remove('hidden');
     } else {
         yearsRow.classList.add('hidden');
     }
 }
-
-
 
 
 
